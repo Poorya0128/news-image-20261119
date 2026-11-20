@@ -1777,12 +1777,8 @@ def build():
 
     out = img.resize((W, H), Image.LANCZOS).convert("RGB")
     buf = io.BytesIO()
-    out.save(buf, "JPEG", quality=95, optimize=True)
+    out.save(buf, "PNG", optimize=True)
     data = buf.getvalue()
-    if len(data) > 1048576:
-        buf = io.BytesIO()
-        out.save(buf, "JPEG", quality=85, optimize=True)
-        data = buf.getvalue()
     with open(os.path.join(HERE, "entry.png"), "wb") as fh:
         fh.write(data)
     print("entry.png", len(data), "bytes; level1 end", round(l1_end), "level2 end", round(l2_end),
