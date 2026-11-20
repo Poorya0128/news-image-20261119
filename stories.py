@@ -38,6 +38,15 @@ data-driven Markets/Sports panels are kept from v8; everything else
 v12: ten briefs replaced (25-29, 41-45) per the user's edit prompt.
 Recomputed from the data: ASIA 9, MIDDLE EAST 7, EUROPE 9, AFRICA 6,
 NORTH AMERICA 9, LATIN AMERICA 3, GLOBAL 3 = 46.
+
+v13 rev 10 (Second Check + user corrections): brief 30 "Cincinnati:
+Fiona the hippo dies" is DELETED and replaced by "Congo: Ebola tops
+11,600 cases" (AFRICA) — the user ordered the swap to make space for
+the 19 Nov Ebola figures. Region counts recomputed: ASIA 9, MIDDLE
+EAST 7, EUROPE 9, AFRICA 7, NORTH AMERICA 8, LATIN AMERICA 3,
+GLOBAL 3 = 46. Brief 28 reads "Mars: Perseverance, Odyssey pause
+science" (user correction — "Mars: pause science" is ambiguous);
+brief 23 reads "Brazil: Raoni's birthplace" (figure dropped).
 """
 
 LEAD = [
@@ -47,8 +56,8 @@ LEAD = [
      "dek": ("Symbolic pledge after 90-minute Shenzhen meeting; no arms-talks timetable.")},
     {"art": "hague", "region": "GLOBAL", "beat": "GENOCIDE RULING", "src": "UN NEWS",
      "at": (4.4, 52.1),
-     "hed": "ICJ finds Myanmar guilty of genocide",
-     "dek": ("First genocide ruling vs a state; Rohingya case decided at The Hague.")},
+     "hed": "ICJ rules Myanmar committed genocide",
+     "dek": ("9\u20136 ruling; first time a state found to have committed genocide.")},
     {"art": "pif", "region": "MIDDLE EAST", "beat": "ATTACK", "src": "SPA \u00b7 AFP",
      "at": (46.7, 24.7),
      "hed": "Houthi attack damages Riyadh's PIF Tower",
@@ -126,7 +135,7 @@ BRIEFS = [
     ("Florida", "Flood emergency widened", "NORTH AMERICA", (-81.7, 28.5)),
     ("Mars", "Perseverance, Odyssey hit glitches", "GLOBAL", (-118.17, 34.15)),
     ("Senate", "Iran war-powers bid fails 48–51", "NORTH AMERICA", (-77.0, 38.9)),
-    ("Cincinnati", "Fiona the hippo dies", "NORTH AMERICA", (-84.5, 39.1)),
+    ("Congo", "Ebola tops 11,600 cases", "AFRICA", (22.0, -2.0)),
     ("Florida", "record 20th execution", "NORTH AMERICA", (-81.7, 28.5)),
     ("Washington", "DOJ drops TPS bid", "NORTH AMERICA", (-77.0, 38.9)),
     ("Senegal", "4 bodies found", "AFRICA", (-17.4, 14.7)),
@@ -143,8 +152,9 @@ BRIEFS = [
     # exactly the column width); the other nine use the briefed texts
     # verbatim. Mars (a space story) is plotted at JPL, Pasadena, since
     # every brief needs a map dot. Region counts recomputed from the
-    # data: ASIA 9, MIDDLE EAST 7, EUROPE 9, AFRICA 6, NORTH AMERICA 9,
-    # LATIN AMERICA 3, GLOBAL 3 = 46. The UWCL briefs leave the list
+    # data: ASIA 9, MIDDLE EAST 7, EUROPE 9, AFRICA 7, NORTH AMERICA 8,
+    # LATIN AMERICA 3, GLOBAL 3 = 46 (rev 10: brief 30 Cincinnati ->
+    # Congo Ebola moves one count NORTH AMERICA -> AFRICA). The UWCL briefs leave the list
     # (and the Sports panel), so the list/Sports duplication is gone.
     ("Copenhagen", "MPs back Greenland deal", "EUROPE", (12.57, 55.68)),
     ("France", "Green leader to back Mélenchon", "EUROPE", (2.35, 48.86)),
@@ -162,36 +172,97 @@ BRIEFS = [
 # Shenzhen, UTC+8) and 09:00 ICJ reads judgment (10:00 The Hague, UTC+1).
 # v9: back to the v7 chip strip (7 events, full labels); the 05:00 GTA VI
 # tick and the proportional axis are removed.
+# Rev 11 (user order): the strip is rebuilt as real events at the
+# moment they happened — no data releases, no statistics, no
+# publication times. 00:30 Australia jobless, 13:30 US jobless
+# claims and 21:00 Wall St closes are removed. Time corrections:
+# First ANT trade 16:50 -> 16:48, Argentina 22:43 -> 22:40.
+# Full labels fit at 10px Merriweather (total 891.1px, gap 6.3px
+# measured) — no shortening needed. Two consecutive chips may
+# share a colour (07:00 + 08:27 ASIA; 16:48 + 19:01 N. AMERICA).
 TIMELINE = [
-    ("00:04", "Crimean Bridge hit", "EUROPE"),
+    ("07:00", "Kim Keon-hee term upheld", "ASIA"),
     ("08:27", "Big-three summit opens", "ASIA"),
     ("09:00", "ICJ reads judgment", "GLOBAL"),
-    ("13:05", "Kyiv embassies hit", "EUROPE"),
-    ("16:50", "First ANT trade", "NORTH AMERICA"),
-    ("21:00", "Wall St closes", "NORTH AMERICA"),
-    ("22:43", "Argentina 71\u20130", "LATIN AMERICA"),
+    ("16:48", "First ANT trade", "NORTH AMERICA"),
+    ("19:01", "Senate Iran vote", "NORTH AMERICA"),
+    ("22:40", "Argentina 71\u20130", "LATIN AMERICA"),
+    ("23:25", "Kyiv missile attack", "EUROPE"),
 ]
 
 JUDGE_NOTE = "Everything on this page happened, or was first reported, on Thursday 19 November 2026 (any time zone, see Date Check)."
-SOURCES = "Sources named on each story."
-FOOT_NOTE = "Claims by warring sides are attributed. Original drawings, illustration not a photo; map from Natural Earth."
-# v8 (REVISION 3) footer: 4 lines, 10px, pitch 11.5, full width (22..1002).
-# Each line fits on one line at 10px (measured against the real font).
+# Rev 8 footer (rank-1 style): one precise sentence — date rule +
+# attribution + the real sources — in TWO lines at 10px Inter bold
+# (split A, measured: line 1 is 895px, line 2 is 549px, limit 980).
+# Sources are the real ones from the data (leads + cards): Reuters,
+# AP, AFP, BBC, UN News, SPA, PTI, DW, EFE, AIU — plus "and others"
+# for KI and Rockstar, which are named on their own cards.
 FOOTER_LINES = [
-    "SOURCES: every headline card, market tile group and sports result names its source (wire agency, UN body, exchange data or official release); short-list entries come from the same kinds of sources. Figures are copied from them, never estimated.",
-    "CLAIMS: statements by parties to a conflict and single-source or unconfirmed reports carry a CLAIM tag and are attributed, never stated as fact.",
-    "TIMES: clock times are UTC; scheduled times are marked as scheduled. Market figures are US closing values; sports scores are final results.",
-    "LIMITS: compiled on Fri 20 Nov 2026; later corrections are not reflected. Original drawings, illustration not a photo; map from Natural Earth.",
+    "Every story here happened, or was first reported, on Thursday 19 November 2026; claims are attributed. Sources: Reuters, AP, AFP, BBC, UN News, SPA, PTI, DW, EFE, AIU and others.",
+    "Original drawings, illustration not a photo; map from Natural Earth. Markets: AP \u00b7 MarketWatch \u00b7 Kitco \u00b7 Reuters.",
 ]
 
+# DATE CHECK — source data (rev 10 restores the rev 7 7-entry
+# paragraphs; the rev 8/9 chip format is gone at the user's order).
+# The renderer does NOT print these paragraphs verbatim: it prints
+# DC_DISPLAY below, the same facts tidied for the 227px box (the
+# rev 7 flaw was truncation — only 13 of 32 lines shown). Every
+# condensation is listed in the DC_DISPLAY comment; nothing is
+# invented, and every item in every section is still present.
 DATE_CHECK = [
-    ("DATE CHECK \u00b7 Thu 19 Nov 2026", None),
-    ("Rule:", "An item counts if it happened, or was first reported, on Thu 19 Nov 2026 (UTC); local-date exceptions are marked."),
-    ("Times:", "Trump-Xi-Putin talks opened 08:27 UTC (16:27 Shenzhen) \u00b7 ICJ judgment scheduled 10:00 The Hague = 09:00 UTC \u00b7 GTA VI unlocked 05:00 UTC in US/Canada (NZ rollout began 11:00 UTC on the 18th) \u00b7 Anthropic priced Wed 18th, first traded and closed Thu 19th."),
-    ("Edge cases:", "Suneung 23:40 UTC 18th \u00b7 Kumamoto M5.7 17:22 18th \u00b7 Senegal boat 18th \u00b7 Kyiv missile 23:25 19th \u00b7 Brasileir\u00e3o: Corinthians 4-0 Botafogo (21:30 BRT 18th = 00:30 UTC 19th) and Cruzeiro 2-1 Palmeiras (20:30 BRT 18th) are not shown."),
-    ("Left out, first reported Wed 18 Nov:", "Bank Indonesia hike \u00b7 Sanon verdict \u00b7 Yoro killings \u00b7 PAHO measles \u00b7 China drone controls \u00b7 Philippines release \u00b7 Gaza raid start \u00b7 Fatah-3 test \u00b7 Ethiopia\u2013Eritrea buildup \u00b7 Yunus home fire \u00b7 Ebola in Congo (ongoing; latest figures as of 16 Nov)."),
-    ("Not yet news (Fri 20 Nov):", "Akvan landfall \u00b7 COP31 close \u00b7 Jurf al-Sakhar \u00b7 Trump news conference \u00b7 Raoni ordinance."),
-    ("Markets:", "Figures are US closing values for 19 Nov; Asian and European closes and crypto are not shown (no verified 19 Nov close)."),
+    ('DATE CHECK · Thu 19 Nov 2026', None),
+    ('Rule:', 'An item counts if it happened, or was first reported, on Thu 19 Nov 2026 (UTC); local-date exceptions are marked.'),
+    ('Times:', 'Trump-Xi-Putin talks opened 08:27 UTC (16:27 Shenzhen) · ICJ judgment scheduled 10:00 The Hague = 09:00 UTC · GTA VI unlocked 05:00 UTC in US/Canada (NZ rollout began 11:00 UTC on the 18th) · Anthropic priced late 18 Nov ET, first traded and closed Thu 19th.'),
+    ('Edge cases:', 'Suneung 23:40 UTC 18th · Kumamoto M5.7 17:22 18th · Senegal boat 18th · Kyiv missile 23:25 19th · Brasileirão: Corinthians 4-0 Botafogo (21:30 BRT 18th = 00:30 UTC 19th) and Cruzeiro 2-1 Palmeiras (20:30 BRT 18th) are not shown.'),
+    ('Left out, first reported Wed 18 Nov:', 'Bank Indonesia hike · Sanon verdict · Yoro killings · Philippines release · Gaza raid start · Fatah-3 test · Ethiopia–Eritrea buildup · Yunus home fire.'),
+    ('Not yet news (Fri 20 Nov):', 'Akvan landfall · COP31 close · Jurf al-Sakhar · Trump news conference.'),
+    ('Markets:', 'Figures are US closing values for 19 Nov; Asian and European closes and crypto are not shown (no verified 19 Nov close).'),
+]
+
+# DC_DISPLAY — the tidied presentation of DATE_CHECK, rendered by
+# datecheck_block. Same facts, restructured so the whole box fits
+# (16 lines at 9px Inter in the 242px box — nothing hidden):
+#   * Rule: one line — "on 19 Nov 2026 (UTC), or first reported."
+#     (the "An item counts if it happened" lead-in and the
+#     "local-date exceptions are marked" clause are dropped; the
+#     Edge section below IS the marked exceptions, each dated).
+#   * Times: four item lines, time right-aligned, chronological
+#     (05:00 GTA, 08:27 talks, 09:00 ICJ, then Anthropic).
+#     Rev 11: the items are shortened so each fits one line at 9px
+#     — GTA drops "(NZ 11:00 UTC 18th)" (card 16 carries the NZ
+#     detail), talks drop "(16:27 Shenzhen)", ICJ drops
+#     "scheduled". Anthropic keeps the full B10 wording ("priced
+#     late 18 Nov ET; traded + closed Thu 19th", 247.0px in 249px
+#     available — measured, 2px slack).
+#   * Edge cases: flowing text, full UTC conversion kept
+#     ("21:30 BRT 18th = 00:30 UTC 19th"). Rev 11: "UTC" dropped
+#     after Suneung's time (the Rule already says UTC), "19th"
+#     dropped after Kyiv 23:25 (unmarked = 19 Nov per the Rule),
+#     Cruzeiro's "(20:30 BRT 18th)" dropped. Ebola is NOT here
+#     (user correction: it is a 19 Nov story in its own right,
+#     now brief 30, not an edge case).
+#   * Left out / Not yet: verbatim items; labels shortened to
+#     "Left out · Wed 18 Nov:" / "Not yet · Fri 20 Nov:".
+#     Left out drops Ebola (now brief 30), China drone controls
+#     (announced 19 Oct, not 18 Nov) and PAHO measles (17th, not
+#     18th); Not yet drops Raoni ordinance (signed 19 Nov — the
+#     Raoni story is brief 23).
+#   * Markets: "Figures are" dropped, "(no verified 19 Nov
+#     close)" -> "— no verified close"; the reason is kept.
+# Kinds: "para" = red bold label inline + flowing wrapped body;
+# "timed" = one item per line, (item, right-aligned time or None).
+DC_DISPLAY = [
+    ("Rule:", "para", "on 19 Nov 2026 (UTC), or first reported."),
+    ("Times:", "timed", [
+        ("GTA VI unlocked", "05:00 UTC"),
+        ("Trump–Xi–Putin talks opened", "08:27 UTC"),
+        ("ICJ judgment", "10:00 Hague = 09:00 UTC"),
+        ("Anthropic priced late 18 Nov ET; traded + closed Thu 19th", None),
+    ]),
+    ("Edge cases:", "para", "Suneung 23:40 18th · Kumamoto M5.7 17:22 18th · Senegal boat 18th · Kyiv missile 23:25 · Brasileirão: Corinthians 4–0 Botafogo 21:30 BRT 18th (= 00:30 UTC 19th); Cruzeiro 2–1 Palmeiras — not shown."),
+    ("Left out · Wed 18 Nov:", "para", "Bank Indonesia hike · Sanon verdict · Yoro killings · Philippines release · Gaza raid start · Fatah-3 test · Ethiopia–Eritrea buildup · Yunus home fire."),
+    ("Not yet · Fri 20 Nov:", "para", "Akvan landfall · COP31 close · Jurf al-Sakhar · Trump news conference."),
+    ("Markets:", "para", "US closes for 19 Nov only; Asian/European closes and crypto not shown — no verified close."),
 ]
 
 REGIONS = ["ASIA", "MIDDLE EAST", "EUROPE", "AFRICA", "NORTH AMERICA", "LATIN AMERICA", "GLOBAL"]

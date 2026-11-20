@@ -10,8 +10,8 @@ An entry for make.fun's one-day world news image contest (news-image-20261119).
 - `build.py` draws `entry.png` with Pillow: `pip install pillow && python build.py`.
 - `stories.py` holds the 46 stories in four tiers.
 - `data/markets.json` and `data/sports.json` hold the Markets and Sports panel rows.
-- `fonts/` holds Merriweather and Archivo, both under the SIL Open Font License 1.1 (see `fonts/OFL-*.txt`).
-- `assets/cards/small/` holds the 16 spot illustrations (downscaled copies; the card art is original illustration, not photographs).
+- `fonts/` holds Merriweather and Inter, both under the SIL Open Font License 1.1 (see `fonts/OFL-*.txt`; the Archivo file is unused).
+- `assets/cards/` holds the 16 spot illustrations (the card art is original illustration, not photographs); `assets/logos/` holds the team and market logos.
 
 Code is under the MIT License (see `LICENSE`).
 
